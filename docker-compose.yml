@@ -1,0 +1,66 @@
+# Файл docker-compose.yml
+# version: 'v2.39.1-desktop.1'
+# Перечень контейнеров
+services:
+  # Имя и описание первого контейнера; имя выбирает разработчик. 
+  # Это контейнер селеноида
+  selenoid:
+    # Из какого образа запустить контейнер:
+    image: "aerokube/selenoid"
+    # Как назвать контейнер:
+    container_name: selenoid
+    # Порты для работы:
+    ports:
+      - "4444:4444"
+    # Настройка сети для взаимодействия контейнеров
+    networks:
+      - selenoid
+
+    # Настройки браузера для него (browser.json) примут вид
+    # chrome:
+    #   default: 128.0  #версия браузера по умолчанию     
+    #   versions:
+    #     128.0:
+    #       image: "selenoid/chrome:128.0"  #(образ, который будет подниматься в селеноиде
+    #       port: "4444"                    #он должен быть спулен заранее с dockerhub)
+    #       path: /
+    
+    # Какой volume подключить для этого контейнера
+    volumes:
+      - "/c/etc/selenoid:/etc/selenoid"    #тут должен лежать browsers.json с настройками браузера
+      - "./browsers.json:/etc/selenoid/browsers.json"    #тут должен лежать browsers.json с настройками браузера
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/c/etc/selenoid/video:/opt/selenoid/video"
+      - "/c/etc/selenoid/logs:/opt/selenoid/logs"
+    environment:
+      - OVERRIDE_VIDEO_OUTPUT_DIR=/c/etc/selenoid/video
+    command: ["-conf", "/etc/selenoid/browsers.json", "-container-network", "selenoid"]
+
+  # Имя и описание контейнера ui для селеноида
+  selenoid-ui:
+    image: "aerokube/selenoid-ui:latest"
+    container_name: selenoid-ui
+    links:
+      - selenoid
+    ports:
+      - "8081:8080"
+    networks:
+      - selenoid
+    command: ["--selenoid-uri", "http://selenoid:4444"]
+
+  test:
+    image: "webtest"
+    container_name: webtest
+    volumes:
+      - ".:/app"
+    # Какие контейнеры нужно запустить до старта этого контейнера:
+    depends_on:
+      - selenoid
+    networks:
+      - selenoid
+    command: ["pytest"]
+
+# Регистрация новой сети:
+networks:
+  selenoid:
+    name: selenoid
