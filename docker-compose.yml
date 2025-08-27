@@ -47,10 +47,9 @@ services:
     networks:
       - selenoid
     command: ["--selenoid-uri", "http://selenoid:4444"]
-
   test:
-    image: "webtest"
-    container_name: webtest
+    image: "test"
+    container_name: test
     volumes:
       - ".:/app"
     # Какие контейнеры нужно запустить до старта этого контейнера:
@@ -59,7 +58,6 @@ services:
     networks:
       - selenoid
     command: ["pytest"]
-
 # Регистрация новой сети:
 networks:
   selenoid:
