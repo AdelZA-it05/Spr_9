@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - develop
-
 jobs:
   run-selenoid-tests:
     runs-on: python:3.11-slim # ubuntu-latest # slim
@@ -15,4 +14,4 @@ jobs:
 #       - name: Pull selenoid image
 #        run: docker pull selenoid/chrome:128.0
       - name: Run tests in docker
-        run: docker compose up --build --exit-code-from test_docker
+        run: docker compose up --build --exit-code-from webtest
