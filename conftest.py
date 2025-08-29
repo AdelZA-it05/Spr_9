@@ -12,22 +12,22 @@ from selenium.webdriver.chrome.options import Options
 
 # @pytest.fixture
 # def driver():
-#     # options = webdriver.ChromeOptions()
-#     driver = webdriver.Chrome()
+#     options = webdriver.ChromeOptions()
+#     driver = webdriver.Chrome(options=options)
 #     yield driver
 #     driver.quit()
 
 
-@pytest.fixture
-def driver():
-    options = webdriver.ChromeOptions()
-    options.add_argument("--headless")  # можно убрать если хочешь видеть браузер (через VNC)
-    driver = webdriver.Remote(
-        command_executor="http://selenium:4444/wd/hub",
-        options=options
-    )
-    yield driver
-    driver.quit()
+# @pytest.fixture
+# def driver():
+#     options = webdriver.ChromeOptions()
+#     options.add_argument("--headless")  # можно убрать если хочешь видеть браузер (через VNC)
+#     driver = webdriver.Remote(
+#         command_executor="http://selenium:4444/wd/hub",
+#         options=options
+#     )
+#     yield driver
+#     driver.quit()
 
 
 # @pytest.fixture

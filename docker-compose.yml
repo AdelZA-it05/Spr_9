@@ -2,7 +2,15 @@
 # version: 'v2.39.1-desktop.1'
 # Перечень контейнеров
 services:
-  # Имя и описание первого контейнера; имя выбирает разработчик. 
+  # блок доступа к x-server
+  your-ui-test-service:
+    image: test
+    network_mode: "host"
+    environment:
+      - DISPLAY=$DISPLAY
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix # Подключение к X-серверу
+  # Имя и описание первого контейнера; имя выбирает разработчик.
   # Это контейнер селеноида
   selenoid:
     # Из какого образа запустить контейнер:

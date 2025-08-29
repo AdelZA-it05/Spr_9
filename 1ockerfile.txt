@@ -1,6 +1,6 @@
 # Используем готовый образ selenium с Chrome и chromedriver
 # FROM selenium/standalone-chrome:latest
-FROM selenoid/chrome:128.0
+FROM selenium/standalone-chrome:122.0
 
 # Устанавливаем Python и pip внутри контейнера
 USER root
@@ -19,13 +19,8 @@ RUN chromedriver --version
 # Проверяем версию Google Chrome
 RUN google-chrome --version
 
-# Переменные окружения (Chromium уже в другом контейнере)
-ENV SELENIUM_REMOTE_URL="http://selenium:4444/wd/hub"
-
-EXPOSE 4444
-EXPOSE 8000
-EXPOSE 7070
-EXPOSE 8080
+# Открытие порта 4444
+# EXPOSE 4444
 
 # ENTRYPOINT ["/usr/bin/selenoid", "-listen", ":4444", "-conf", "/etc/selenoid/browsers.json", "-video-output-dir", "/opt/selenoid/video/"]
 
