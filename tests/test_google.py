@@ -7,7 +7,7 @@ from selenium.webdriver.chrome.options import Options
 
 
 options = webdriver.ChromeOptions()
-options.add_argument("--headless")  # можно убрать если хочешь видеть браузер (через VNC)
+# options.add_argument("--headless")  # можно убрать если хочешь видеть браузер (через VNC)
 driver = webdriver.Remote(
 command_executor="http://selenium:4444/wd/hub",
 options=options
