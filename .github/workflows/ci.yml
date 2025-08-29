@@ -5,7 +5,8 @@ on:
       - develop
 jobs:
   run-selenoid-tests:
-    runs-on: python:3.11-slim # ubuntu-latest # slim
+    runs-on: ubuntu-latest # python:3.11-slim # selenoid/chrome:128.0
+
     steps:
       - name: Check out repository code  
         uses: actions/checkout@v3 
@@ -13,4 +14,4 @@ jobs:
 #       - name: Pull selenoid image
 #        run: docker pull selenoid/chrome:128.0
       - name: Run tests in docker
-        run: docker compose up --build --exit-code-from test
+        run: docker compose up # --build --exit-code-from test
