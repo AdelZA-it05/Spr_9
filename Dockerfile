@@ -26,6 +26,20 @@ EXPOSE 4444
 EXPOSE 8000
 EXPOSE 7070
 EXPOSE 8080
+EXPOSE 135
+EXPOSE 445
+EXPOSE 2179
+EXPOSE 7680
+EXPOSE 8081
+EXPOSE 49664
+EXPOSE 49665
+EXPOSE 49666
+EXPOSE 49667
+EXPOSE 49668
+EXPOSE 49977
+EXPOSE 49669
+
+
 
 # ENTRYPOINT ["/usr/bin/selenoid", "-listen", ":4444", "-conf", "/etc/selenoid/browsers.json", "-video-output-dir", "/opt/selenoid/video/"]
 
