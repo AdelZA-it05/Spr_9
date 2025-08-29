@@ -5,7 +5,8 @@ on:
       - develop
 jobs:
   run-selenoid-tests:
-    runs-on: selenoid/chrome:128.0 # python:3.11-slim # ubuntu-latest # slim
+    runs-on: ubuntu-latest # python:3.11-slim # selenoid/chrome:128.0
+
     steps:
       - name: Check out repository code  
         uses: actions/checkout@v3 
